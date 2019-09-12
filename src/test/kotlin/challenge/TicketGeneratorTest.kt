@@ -14,9 +14,10 @@ class TicketGeneratorTest {
     @Test fun testGeneratedTicketsAreValid() {
         val random = Random
         for (i in 1..100000) {
-            val strip = TicketGenerator(random).generate()
-            assertTrue(strip.all { it.isValid() })
-            assertEquals((1..90).toList(), strip.flatMap { it.allNumbers() }.sorted())
+            for(strip in arrayOf(TicketGenerator(random).generate(), TicketGenerator(random).generate(true))) {
+                assertTrue(strip.all { it.isValid() })
+                assertEquals((1..90).toList(), strip.flatMap { it.allNumbers() }.sorted())
+            }
         }
     }
 }
